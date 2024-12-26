@@ -1,17 +1,16 @@
-import { Tilt } from "react-tilt"
-import { motion } from "framer-motion"
+import { Tilt } from "react-tilt";
+import { motion } from "framer-motion";
+import { useState, useEffect } from 'react'; // Import useState and useEffect
 
-import { styles } from "../styles"
-import { github } from "../assets"
-import { SectionWrapper } from "../hoc"
-import { projects } from "../constants"
-import { fadeIn, textVariant } from "../utils/motion"
+import { styles } from "../styles";
+import { github } from "../assets";
+import { SectionWrapper } from "../hoc";
+import { projects } from "../constants"; // Assuming projects is an array
+import { fadeIn, textVariant } from "../utils/motion";
 
 const ProjectCard = ({ index, name, description, tags, image, source_code_link }) => {
   return (
-    <motion.div
-      variants={fadeIn("up", "spring", index * 0.5, 0.75)}
-    >
+    <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
       <Tilt
         options={{
           max: 45,
@@ -60,40 +59,54 @@ const ProjectCard = ({ index, name, description, tags, image, source_code_link }
   );
 };
 
-
-
-
-
 const Works = () => {
+  const [isMobile, setIsMobile] = useState(false); // State for mobile detection
+  const numProjectsToShow = 4; // Number of projects to show on mobile
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Adjust breakpoint as needed
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check on component mount
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const filteredProjects = isMobile ? projects.slice(0, numProjectsToShow) : projects;
+
   return (
     <>
-    <motion.div variants={textVariant()}>
-      <p className={styles.sectionSubText}>MY WORK</p>
-            <h2 className={styles.sectionHeadText}>Projects.</h2>
-    </motion.div>
+      <motion.div variants={textVariant()}>
+        <p className={styles.sectionSubText}>MY WORK</p>
+        <h2 className={styles.sectionHeadText}>Projects.</h2>
+      </motion.div>
 
-    <div className="w-full flex">
-      <motion.p
-      variants={fadeIn("","",0.1,1)}
-      className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
-      >
-        Following projects showcases my skills and experience through real-world
-        examples and my work. Each project is briefly described with links code to repositories
-        and live demos in it. It reflects my ability to solve complex problems, work with different
-        technologies, and manage projects effectively.
-      </motion.p>
-    </div>
-    <div className="mt-20 flex flex-wrap gap-7">
-      {projects.map((project, index) => (  
-      <ProjectCard
-      key = {`projects-${index}`}
-      index={index}
-      {...project}
-        />
-    ))}
-    </div>
+      <div className="w-full flex">
+        <motion.p
+          variants={fadeIn("", "", 0.1, 1)}
+          className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
+        >
+          Following projects showcases my skills and experience through real-world
+          examples and my work. Each project is briefly described with links code to repositories
+          and live demos in it. It reflects my ability to solve complex problems, work with different
+          technologies, and manage projects effectively.
+        </motion.p>
+      </div>
+      <div className="mt-20 flex flex-wrap gap-7">
+        {filteredProjects.map((project, index) => (
+          <ProjectCard
+            key={`projects-${index}`}
+            index={index}
+            {...project}
+          />
+        ))}
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default SectionWrapper(Works,"work")
+export default SectionWrapper(Works, "work");
