@@ -165,7 +165,7 @@ import {
       company_name: "Blount Fine Foods",
       icon: blount,
       iconBg: "#6C712F",
-      date: "Oct 2023 - Present",
+      date: "Oct 2024 - Present",
       points: [
         "Developed comprehensive reports and dashboards to monitor key performance indicators (KPIs).",
         "Assisted in maintaining relationships with vendors and evaluated their performance through scorecards and data insights.",
