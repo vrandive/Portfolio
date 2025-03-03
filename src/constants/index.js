@@ -30,6 +30,9 @@ import {
   import airline from "../assets/airline.jpeg";
   import car from "../assets/car.jpg";
   import expense from "../assets/expense.png";
+  import netflix from "../assets/logo_netflix.png";
+  import harvard_x from "../assets/harvard_x.jpeg";
+  import google_digital_garage from "../assets/google-digital-unlocked-icon-filled-256.webp";
 
   
   export const navLinks = [
@@ -182,7 +185,7 @@ import {
       name: "Sara Lee",
       designation: "CFO",
       company: "Acme Co",
-      image: "https://randomuser.me/api/portraits/women/4.jpg",
+      image: harvard_x,
     },
     {
       testimonial:
@@ -190,19 +193,24 @@ import {
       name: "Chris Brown",
       designation: "COO",
       company: "DEF Corp",
-      image: "https://randomuser.me/api/portraits/men/5.jpg",
-    },
-    {
-      testimonial:
-        "After Rick optimized our website, our traffic increased by 50%. We can't thank them enough!",
-      name: "Lisa Wang",
-      designation: "CTO",
-      company: "456 Enterprises",
-      image: "https://randomuser.me/api/portraits/women/6.jpg",
+      image: google_digital_garage,
     },
   ];
   
   const projects = [
+    {
+      name: "Data Analysis on Netflix",
+      description:
+        "In-depth analysis of Netflix’s movie and TV show catalog using SQL. By querying a comprehensive dataset, Uncovering key insights into content distribution, popular ratings, and regional trends. The analysis explored the dominance of movies over TV shows, identified the top content-producing countries, and highlighted trends in content releases.",
+      tags: [
+        {
+          name: "sql",
+          color: "blue-text-gradient",
+        },
+      ],
+      image: netflix,
+      source_code_link: "https://github.com/vrandive/Analysis-on-Netflix-Content",
+    },
     {
       name: "Sales Insight",
       description:
